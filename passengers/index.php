@@ -129,7 +129,7 @@
       <div class="table-header">
         <h2>Добавить пассажира</h2>
       </div>
-      <div class="table-block">
+      <div class="table-block" id="add-passengers-block">
         <div class="form-container">
           <form action="" method="POST" enctype="multipart/form-data" name="drivers">
             <div class="form-item">
