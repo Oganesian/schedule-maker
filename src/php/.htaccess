@@ -1,0 +1,5 @@
+#Deny from all
+SetEnvIfNoCase X-Requested-With XMLHttpRequest script
+Order Deny,Allow
+Deny from all
+Allow from env=script
