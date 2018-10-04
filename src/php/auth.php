@@ -20,13 +20,10 @@ if(isset($_POST["auth"])) {
       setcookie ("id", $line['id'], time() + 50000, '/');
       setcookie ("SESSION_HASH", md5($hash.md5($line['login'].$hash)), time() + 50000, '/');
       header("Location: ../../");
-      echo "<script>alert('OK')</script>";
     } else {
-      // wrong pass
       echo "<script>alert('wrong pass')</script>";
     }
   } else {
-    // no such a user
     echo "<script>alert('no such a user')</script>";
   }
 }

@@ -7,7 +7,6 @@ function setButtonClick() {
     event.preventDefault();
     $(".ld-ring").css("display", "block");
     $("#addDriverExceptionBtn").val("");
-    //alert($('#input-date').val());
     $.post('../src/php/forms.php', {
       addDriverException: true,
       driver: $('#combo-driver').val(),
