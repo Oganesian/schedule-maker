@@ -40,15 +40,20 @@ function createScheduleForAMonth($meeting_days, $passengers){
           $driver = $drivers->fetch_assoc();
           $places_in_car_sql = my_query("SELECT places_in_car FROM publishers WHERE id_publisher = '{$driver['id_publisher']}'", true);
           $places_in_car_row = $places_in_car_sql->fetch_assoc();
-          $temp_query = "SELECT * FROM days_when_publisher_cant_drive WHERE day='{$meeting_day->format('Y-m-d')}' AND id_publisher = '{$driver["id_publisher"]}' AND type = 1";
+          $temp_query = "SELECT * FROM days_when_publisher_cant_drive WHERE day='{$meeting_day->format('Y-m-d')}' AND id_publisher = '{$driver["id_publisher"]}' AND type = 0";
           $temp = my_query($temp_query, true);
+          $type_num = 0;
+          if($temp->num_rows > 0) {
+            $type = $temp->fetch_assoc();
+            $type_num = $type["type"];
+          }
           if(!$temp || !$temp->num_rows) {
             $passenger["places_need"] -= $places_in_car_row["places_in_car"];
             $id_publisher = $driver["id_publisher"];
             $id_passenger = $passenger["id"];
             $meeting_day_str = $meeting_day->format('Y-m-d');
             my_query("UPDATE who_takes_whom SET last_drive_date = '{$meeting_day_str}' WHERE id_publisher = '{$id_publisher}' AND id_passenger = '{$id_passenger}'", false);
-            my_query("INSERT INTO fahrplan VALUES('$id_publisher', '$id_passenger', '$meeting_day_str', '0')", false);
+            my_query("INSERT INTO fahrplan VALUES('$id_publisher', '$id_passenger', '$meeting_day_str', '$type_num')", false);
           } else {
             break 1;
           }

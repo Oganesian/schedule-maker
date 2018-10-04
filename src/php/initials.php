@@ -287,6 +287,7 @@ function initializeScheduleForAPassenger($passenger_row){
           <th>Кто забирает</th>
           <th>Дата</th>
           <th>День недели</th>
+          <th>Примечание</th>
           <th class='buttons-td'><button class='std-button save' id='{$tagId}-button'>•••</button></th>
         </tr>";
     $echo = $tableHeaders;
@@ -297,9 +298,11 @@ function initializeScheduleForAPassenger($passenger_row){
         $publisher_row = $publisher_sql->fetch_assoc();
         $day_of_week = date('N', strtotime($line_temp["date"]));
         $day_of_week = myParseDay($day_of_week-1);
+        $type = myParseType($line_temp["type"]);
         $tr = "<tr><td id='{$passenger_row["id_passenger"]}_{$date}_{$line_temp["id_publisher"]}'>{$publisher_row["publisher"]}</td>";
         $tr .= "<td id='{$passenger_row["id_passenger"]}_{$date}_{$line_temp["id_publisher"]}_date'>{$date}</td>";
         $tr .= "<td>{$day_of_week}</td>";
+        $tr .= "<td>{$type}</td>";
         $tr .= "<td class='buttons-td'>";
         $tr .= "<button class='std-button edit-delete' id='{$passenger_row["id_passenger"]}_{$date}_{$line_temp["id_publisher"]}'>•••</button></td></tr>";
         $echo .= $tr;
@@ -499,6 +502,15 @@ function myParseDay($day){
     case 4: return "Пятница"; break;
     case 5: return "Суббота"; break;
     case 6: return "Воскресенье"; break;
+  }
+}
+
+function myParseType($type){
+  switch($type){
+    case 0: return ""; break;
+    case 1: return "Привезет в Зал Царства"; break;
+    case 2: return "Увезет домой"; break;
+    default: return "";
   }
 }
 

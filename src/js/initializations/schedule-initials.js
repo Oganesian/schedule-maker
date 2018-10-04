@@ -103,7 +103,7 @@ function setButtonClick() {
 
 function getTableData(id){
   var myTableArray = [];
-  var headers = ['Кто забирает', 'Дата', 'День недели'];
+  var headers = ['Кто забирает', 'Дата', 'День недели', 'Примечание'];
   myTableArray.push(headers);
   var firstDate = $("table#"+id+" td:eq( 1 )").text();
   var month = firstDate.substr(3, 2);
@@ -137,6 +137,7 @@ function saveAsPDF(id) {
     dataRow.push(sourceRow[0]);
     dataRow.push(sourceRow[1]);
     dataRow.push(sourceRow[2]);
+    dataRow.push(sourceRow[3]);
     bodyData.push(dataRow)
   });
 
@@ -146,7 +147,7 @@ function saveAsPDF(id) {
       style: 'tableExample',
       table: {
         headerRows: 1,
-        widths: [ '33.3%', '33.4%', '33.3%'],
+        widths: [ '25%', '25%', '25%', '25%'],
         body: bodyData
       },
       layout: {
