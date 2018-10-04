@@ -254,28 +254,29 @@ function initializeSchedules(){
     $result = my_query("SELECT id_passenger, passenger, address, phone FROM passengers", true);
     $echo = "";
     while($passenger_row = $result->fetch_assoc()){
+      $getDate = my_query("SELECT MAX(date) FROM fahrplan WHERE id_passenger = '{$passenger_row["id_passenger"]}'", true);
+      $date = $getDate->fetch_assoc();
+      $month = substr($date["MAX(date)"], 5, 2);
+      $month_str = myParseMonth($month);
+      $year = substr($date["MAX(date)"], 0, 4);
       $name = translit($passenger_row["passenger"]);
       $tagId = str_replace(" ", "", $name);
       $passenger_header = "<div class='table-header hideable' id='{$tagId}-header'>
             <div id='{$tagId}-img' class='hide-show-arrow'><img src='src/img/arrow.svg'/></div>
-            <h2>{$name}</h2>
+            <h2>{$name} — {$month_str}</h2>
           </div>";
       $passenger_block = "<div class='table-block' id='{$tagId}-block'><div class='block-container'>";
       $echo .= $passenger_header . $passenger_block;
-      $echo .= initializeScheduleForAPassenger($passenger_row);
+      $echo .= initializeScheduleForAPassenger($passenger_row, $month, $year);
     }
     echo $echo;
   }
 }
 
-function initializeScheduleForAPassenger($passenger_row){
+function initializeScheduleForAPassenger($passenger_row, $month, $year){
     $echo = "";
     $name = translit($passenger_row["passenger"]);
     $tagId = str_replace(" ", "", $name);
-    $getDate = my_query("SELECT MAX(date) FROM fahrplan WHERE id_passenger = '{$passenger_row["id_passenger"]}'", true);
-    $date = $getDate->fetch_assoc();
-    $month = substr($date["MAX(date)"], 5, 2);
-    $year = substr($date["MAX(date)"], 0, 4);
     $temp = my_query("SELECT * FROM fahrplan WHERE id_passenger = '{$passenger_row["id_passenger"]}' AND MONTH(date) = '{$month}' AND YEAR(date) = '{$year}' ORDER BY date", true);
     $tableHeaders =
       "<table id='{$tagId}-table'>
@@ -518,4 +519,21 @@ function myParseType($type){
   }
 }
 
+function myParseMonth($date){
+  switch($date){
+    case "1": return "Январь"; break;
+    case "2": return "Февраль"; break;
+    case "3": return "Март"; break;
+    case "4": return "Апрель"; break;
+    case "5": return "Май"; break;
+    case "6": return "Июнь"; break;
+    case "7": return "Июль"; break;
+    case "8": return "Август"; break;
+    case "9": return "Сентябрь"; break;
+    case "10": return "Октябрь"; break;
+    case "11": return "Ноябрь"; break;
+    case "12": return "Декабрь"; break;
+    default: return "";
+  }
+}
 ?>
