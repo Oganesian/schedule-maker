@@ -175,7 +175,7 @@ ul li a {
 
 .passenger-information {
   width: 100%;
-  /*overflow: hidden;*/
+  text-align: left;
   margin-bottom: 15px;
 }
 
@@ -225,7 +225,12 @@ ul li a {
   width: 95%;
   color: #212121;
   padding: 20px;
-  padding-bottom: 65px;
+  padding-bottom: 160px;
+}
+
+.save {
+  margin-bottom: 30px !important;
+  width: 200px !important;
 }
 
 .main-row table td, .main-row table th {
@@ -383,8 +388,15 @@ input:focus {
   width: 170px;
 }
 
-.save-dropdown {
-  width: 134px;
+.fixed-info {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+}
+
+.block-container {
+  position: relative;
 }
 
 .dialog-wrapper {

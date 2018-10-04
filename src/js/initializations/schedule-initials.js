@@ -18,9 +18,8 @@ $(document).ready(function() {
     myDeleteDialog(id, date);
   });
 
-  $("#save").click(function() {
-    $('.save-dropdown').fadeOut(20);
-    var id = $(".save-dropdown").attr("id");
+  $(".save").click(function() {
+    var id = this.id;//$(".save-dropdown").attr("id");
     id = id.replace("-button", "-table");
     saveAsPDF(id);
   });
@@ -92,7 +91,7 @@ function setButtonClick() {
     $(".edit-delete-dropdown").fadeIn(20);
   });
 
-  $(".save").click(function() {
+  /*$(".save").click(function() {
     event.stopPropagation();
     $(".dropdown").fadeOut(20);
     var box = this.getBoundingClientRect();
@@ -103,7 +102,7 @@ function setButtonClick() {
     $(".save-dropdown").css("left", box.left - width + 2);
     $(".save-dropdown").attr("id", this.id);
     $(".save-dropdown").fadeIn(20);
-  });
+  });*/
 }
 
 function getTableData(id){

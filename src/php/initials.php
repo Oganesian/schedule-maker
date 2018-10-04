@@ -260,13 +260,9 @@ function initializeSchedules(){
             <div id='{$tagId}-img' class='hide-show-arrow'><img src='src/img/arrow.svg'/></div>
             <h2>{$name}</h2>
           </div>";
-      $passenger_block = "<div class='table-block' id='{$tagId}-block'>";
+      $passenger_block = "<div class='table-block' id='{$tagId}-block'><div class='block-container'>";
       $echo .= $passenger_header . $passenger_block;
       $echo .= initializeScheduleForAPassenger($passenger_row);
-      $echo .= "<div class='passenger-information'>
-            <p>Адрес: {$passenger_row["address"]}</p>
-            <p>Телефон: {$passenger_row["phone"]}</p>
-          </div></div>";
     }
     echo $echo;
   }
@@ -288,7 +284,6 @@ function initializeScheduleForAPassenger($passenger_row){
           <th>Дата</th>
           <th>День недели</th>
           <th>Примечание</th>
-          <th class='buttons-td'><button class='std-button save' id='{$tagId}-button'>•••</button></th>
         </tr>";
     $echo = $tableHeaders;
 
@@ -310,7 +305,16 @@ function initializeScheduleForAPassenger($passenger_row){
     if($echo == $tableHeaders){
       $echo = "<h2 class='empty-table-warning'>Нет записей</h2>";
     } else {
-      $echo .= "</table>";
+      $echo .= "</table>
+                <div class='fixed-info'>
+                  <div class='passenger-information'>
+                    <p>Адрес: {$passenger_row["address"]}</p>
+                    <p>Телефон: {$passenger_row["phone"]}</p>
+                  </div>
+                  <button id='{$tagId}-button' class='submit save'>Скачать PDF</button>
+                </div>
+              </div>
+            </div>";
     }
     return $echo;
 }

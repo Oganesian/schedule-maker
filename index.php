@@ -37,12 +37,6 @@
     </button>
     </div>
 
-    <div class="dropdown hidden save-dropdown">
-      <button slot="item" class="dropdown-item" id="save" role="menuitem">
-      Скачать PDF
-    </button>
-    </div>
-
       <div class="dialog" id="editDriveDialog">
     <div class="dialog-wrapper" id="editWrapper">
       <div class="top-container">
