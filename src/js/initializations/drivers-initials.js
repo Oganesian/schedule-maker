@@ -25,12 +25,7 @@ $(document).ready(function() {
       $("#relations-block").html(data);
     });
   });
-
-  setButtonClick();
-
-});
-
-function setButtonClick() {
+  
   $("#delete").click(function() {
     $('.edit-delete-dropdown').fadeOut(20);
     $(".modal").fadeIn(50);
@@ -101,6 +96,11 @@ function setButtonClick() {
     });
   });
 
+  setButtonClick();
+
+});
+
+function setButtonClick() {
   $(".edit-delete").click(function() {
     event.stopPropagation();
     var box = this.getBoundingClientRect();
