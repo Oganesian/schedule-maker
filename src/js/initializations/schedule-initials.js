@@ -1,10 +1,6 @@
 var parentId = "";
 
 $(document).ready(function() {
-  setButtonClick();
-});
-
-function setButtonClick() {
 
   $("#createScheduleMonth").click(function() {
     if($("#input-1").val() != ""){
@@ -38,23 +34,24 @@ function setButtonClick() {
     myEditDialog(ids, arrayOfStrings[1], arrayOfStrings[2]);
   });
 
-  $(".okButton").click(function() {
-    $(".modal").fadeOut(50);
-    $("#differentPasswordsDialog").fadeOut(10);
-  });
-
   $(".deleteDriveButton").click(function() {
     var ids = this.id;
     var arrayOfStrings = ids.split("_");
     $(".modal").fadeOut(50);
     $("#deleteDriveDialog").fadeOut(10);
     $.post('../src/php/forms.php', {
-      'id': arrayOfStrings[0],
+      'passenger': arrayOfStrings[0],
       'date': arrayOfStrings[1],
+      'driver': arrayOfStrings[2],
       'deleteDrive': true
     }, function(data) {
       $("#"+parentId).html(data);
     });
+  });
+
+  $(".okButton").click(function() {
+    $(".modal").fadeOut(50);
+    $("#differentPasswordsDialog").fadeOut(10);
   });
 
   $(".editScheduleButton").click(function() {
@@ -72,11 +69,18 @@ function setButtonClick() {
         $("#"+parentId).html(data);
         $(".modal").fadeOut(50);
         $(".dialog").fadeOut(10);
+        $(this).html("Изменить");
       });
   });
 
+  setButtonClick();
+});
+
+function setButtonClick() {
+
   $(".edit-delete").click(function() {
     event.stopPropagation();
+    $(".dropdown").fadeOut(20);
     var box = this.getBoundingClientRect();
     var widthDropdown = $(".edit-delete-dropdown").css("width");
     var widthButton = $(".edit-delete").css("width");
@@ -90,6 +94,7 @@ function setButtonClick() {
 
   $(".save").click(function() {
     event.stopPropagation();
+    $(".dropdown").fadeOut(20);
     var box = this.getBoundingClientRect();
     var widthDropdown = $(".save-dropdown").css("width");
     var widthButton = $(".save").css("width");
@@ -131,7 +136,6 @@ function saveAsPDF(id) {
   var monthAndYear = sourceData[1][1].substr(3, 7);
   var name = id.replace("-table", "");
   var fileName = name + " " + monthAndYear;
-  // "-table", ""
   sourceData.forEach(function(sourceRow) {
     var dataRow = [];
     dataRow.push(sourceRow[0]);

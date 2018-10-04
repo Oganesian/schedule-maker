@@ -1,8 +1,5 @@
 $(document).ready(function() {
-  setButtonClick();
-});
 
-function setButtonClick() {
   $("#addDriverExceptionForm").submit(function(event) {
     event.preventDefault();
     $(".ld-ring").css("display", "block");
@@ -18,27 +15,6 @@ function setButtonClick() {
       $("#addDriverExceptionBtn").val("Добавить");
       setButtonClick();
     });
-
-  });
-
-  $("#edit").click(function() {
-    $('.edit-dropdown').fadeOut(20);
-    $(".modal").fadeIn(50);
-    $("#editDriverDialog").fadeIn(50);
-    var weekday = $(".weekday-c").attr("id");
-    var weekend = $(".weekend-c").attr("id");
-    myEditDialog(weekday, weekend);
-  });
-
-  $("#delete").click(function() {
-    $('.delete-dropdown').fadeOut(20);
-    var id = $(".delete-dropdown").attr("id");
-    $.post('../src/php/forms.php', {
-      'deleteNoMeetingDay': true,
-      'id': id
-    }, function(data) {
-      $("#no-meeting-days-block").html(data);
-    });
   });
 
   $("#delete-r").click(function() {
@@ -51,6 +27,17 @@ function setButtonClick() {
       'date': arrayOfStrings[1]
     }, function(data) {
       $("#drivers-exceptions-block").html(data);
+    });
+  });
+
+  $("#delete").click(function() {
+    $('.delete-dropdown').fadeOut(20);
+    var id = $(".delete-dropdown").attr("id");
+    $.post('../src/php/forms.php', {
+      'deleteNoMeetingDay': true,
+      'id': id
+    }, function(data) {
+      $("#no-meeting-days-block").html(data);
     });
   });
 
@@ -78,6 +65,20 @@ function setButtonClick() {
       $("#meetings-days-block").html(data);
     });
   });
+
+  $("#edit").click(function() {
+    $('.edit-dropdown').fadeOut(20);
+    $(".modal").fadeIn(50);
+    $("#editDriverDialog").fadeIn(50);
+    var weekday = $(".weekday-c").attr("id");
+    var weekend = $(".weekend-c").attr("id");
+    myEditDialog(weekday, weekend);
+  });
+
+  setButtonClick();
+});
+
+function setButtonClick() {
 
   $(".edit").click(function() {
     event.stopPropagation();

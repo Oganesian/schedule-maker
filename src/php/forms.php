@@ -75,12 +75,13 @@ if(isset($_POST["deleteDriver"])) {
 
 if(isset($_POST["deleteDrive"])) {
   if(check(1)){
-      $id = safe_query($_POST['id']);
-      $date = safe_query($_POST['date']);
-      $date_sql = date("Y-m-d", strtotime($date));
-      my_query("DELETE FROM fahrplan WHERE id_passenger = '{$id}' AND date = '{$date_sql}'", false);
+    $pass = safe_query($_POST['passenger']);
+    $driver = safe_query($_POST['driver']);
+    $date = safe_query($_POST['date']);
+    $date_sql = date("Y-m-d", strtotime($date));
+    my_query("DELETE FROM fahrplan WHERE id_passenger = '{$pass}' AND id_publisher = '{$driver}' AND date = '{$date_sql}'", false);
 
-      $result = my_query("SELECT id_passenger, passenger, address, phone FROM passengers WHERE id_passenger = '{$id}'", true);
+    $result = my_query("SELECT id_passenger, passenger, address, phone FROM passengers WHERE id_passenger = '{$pass}'", true);
     $passenger_row = $result->fetch_assoc();
     $echo = initializeScheduleForAPassenger($passenger_row);
     $echo .= "<div class='passenger-information'>
