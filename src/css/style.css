@@ -21,7 +21,7 @@ header {
   top: 0;
   position: fixed;
   z-index: 1;
-  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1)
+  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -176,7 +176,8 @@ ul li a {
 .passenger-information {
   width: 100%;
   text-align: left;
-  margin-bottom: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .passenger-information p {
@@ -198,7 +199,7 @@ ul li a {
   border-bottom-right-radius: 5px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
   overflow: auto;
-  max-height: 460px;
+  max-height: 560px;
   transition: all ease .8s;
   flex-basis: auto;
 }
@@ -222,14 +223,14 @@ ul li a {
 
 .main-row table {
   height: 100%;
-  width: 95%;
+  width: 100%;
   color: #212121;
   padding: 20px;
-  padding-bottom: 160px;
+  padding-bottom: 10px;
 }
 
 .save {
-  margin-bottom: 30px !important;
+  margin-bottom: 20px !important;
   width: 200px !important;
 }
 
@@ -389,14 +390,17 @@ input:focus {
 }
 
 .fixed-info {
-  position: absolute;
-  bottom: 0px;
   width: 100%;
   text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0px -1px 15px 0px rgba(0, 0, 0, 0.2);
+  /*0 -3px 5px -2px rgba(0, 0, 0, 0.2);*/
 }
 
 .block-container {
   position: relative;
+  max-height: 400px;
+  overflow-y: scroll;
 }
 
 .dialog-wrapper {

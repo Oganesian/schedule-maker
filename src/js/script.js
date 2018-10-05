@@ -17,7 +17,7 @@ $(document).ready(function() {
     var blockId = id.replace("-header", "-block");
     var imgId = id.replace("-header", "-img");
     if($("#"+blockId).css("max-height") == "0px"){
-         $("#"+blockId).css("max-height", "400px");
+         $("#"+blockId).css("max-height", "560px");
          $("#"+imgId).css("transform", "none");
     } else {
          $("#"+blockId).css("max-height", "0px");

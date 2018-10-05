@@ -306,7 +306,7 @@ function initializeScheduleForAPassenger($passenger_row, $month, $year){
     if($echo == $tableHeaders){
       $echo = "<h2 class='empty-table-warning'>Нет записей</h2>";
     } else {
-      $echo .= "</table>
+      $echo .= "</table></div>
                 <div class='fixed-info'>
                   <div class='passenger-information'>
                     <p>Адрес: {$passenger_row["address"]}</p>
@@ -314,8 +314,7 @@ function initializeScheduleForAPassenger($passenger_row, $month, $year){
                   </div>
                   <button id='{$tagId}-button' class='submit save'>Скачать PDF</button>
                 </div>
-              </div>
-            </div>";
+              </div>";
     }
     return $echo;
 }
