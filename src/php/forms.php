@@ -259,9 +259,10 @@ if(isset($_POST['deletePassengerException'])){
 
 if(isset($_POST["addNoMeetingDay"])){
   if(check(1)){
-  $date = date('Y-m-d', strtotime(safe_query($_POST["date"])));
-  my_query("INSERT INTO no_meeting_days VALUES('{$date}')", false);
-}
+    $date = date('Y-m-d', strtotime(safe_query($_POST["date"])));
+    my_query("INSERT INTO no_meeting_days VALUES('{$date}')", false);
+    initializeNoMeetingDays();
+  }
 }
 
 if(isset($_POST["editPassenger"])) {

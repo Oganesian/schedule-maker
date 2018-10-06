@@ -134,13 +134,14 @@
       </div>
       <div class="table-block" id="add-no-meeting-day-block">
         <div class="form-container">
-          <form action="" method="POST" enctype="multipart/form-data" name="no_meetings">
+          <form action="" method="POST" enctype="multipart/form-data" name="no_meetings" id="addNoMeetingDayForm">
             <div class="form-item">
               <input autocomplete="off" class="form-input" id="input-1" type="date" name="date" pattern="\d{1,2}\.\d{1,2}\.\d{4}" placeholder="дд.мм.гггг" required>
               <label for="input-1" id="label-1">Дата</label>
             </div>
             <div class="submit-container">
-              <input type="submit" name="addNoMeetingDay" class="submit" value="Добавить" />
+              <div class="ld ld-ring ld-cycle" id="loading-1" style="margin: auto; top: 33.5px; width: 2em; height: 2em"></div>
+              <input type="submit" id="addNoMeetingDayBtn" name="addNoMeetingDay" class="submit" value="Добавить" />
             </div>
           </form>
         </div>
@@ -163,7 +164,7 @@
             initializeDriversExceptionsForm();
             ?>
             <div class="submit-container">
-              <div class="ld ld-ring ld-cycle" style="margin: auto; top: 33.5px; width: 2em; height: 2em"></div>
+              <div class="ld ld-ring ld-cycle" id="loading-2" style="margin: auto; top: 33.5px; width: 2em; height: 2em"></div>
               <input type="submit" id="addDriverExceptionBtn" name="addDriverException" class="submit" value="Добавить" />
             </div>
           </form>

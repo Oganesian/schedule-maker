@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   $("#addDriverExceptionForm").submit(function(event) {
     event.preventDefault();
-    $(".ld-ring").css("display", "block");
+    $("#loading-2").css("display", "block");
     $("#addDriverExceptionBtn").val("");
     $.post('../src/php/forms.php', {
       addDriverException: true,
@@ -11,8 +11,23 @@ $(document).ready(function() {
       type: $('#combo-type').val(),
     }, function(data) {
       $("#drivers-exceptions-block").html(data);
-      $(".ld-ring").css("display", "none");
+      $("#loading-2").css("display", "none");
       $("#addDriverExceptionBtn").val("Добавить");
+      setButtonClick();
+    });
+  });
+
+  $("#addNoMeetingDayForm").submit(function(event) {
+    event.preventDefault();
+    $("#loading-1").css("display", "block");
+    $("#addNoMeetingDayBtn").val("");
+    $.post('../src/php/forms.php', {
+      addNoMeetingDay: true,
+      date: $('#input-1').val()
+    }, function(data) {
+      $("#no-meeting-days-block").html(data);
+      $("#loading-1").css("display", "none");
+      $("#addNoMeetingDayBtn").val("Добавить");
       setButtonClick();
     });
   });
