@@ -133,7 +133,7 @@
       </div>
       <div class="table-block">
         <div class="form-container">
-          <form action="" method="POST" enctype="multipart/form-data" name="users">
+          <form action="" method="POST" enctype="multipart/form-data" name="users" id="addUserForm">
             <div class="form-item">
               <input autocomplete="off" class="form-input" id="input-1" type="text" name="user" required>
               <label for="input-1" id="label-1">Фамилия Имя</label>
@@ -151,7 +151,8 @@
               <label for="input-4" id="label-4">Подтверждение пароля</label>
             </div>
             <div class="submit-container">
-              <input type="submit" name="createUser" class="submit" value="Добавить" />
+              <div class="ld ld-ring btn-cycle ld-cycle" id="loading-1"></div>
+              <input type="submit" id="createUserBtn" name="createUser" class="submit" value="Добавить" />
             </div>
           </form>
         </div>

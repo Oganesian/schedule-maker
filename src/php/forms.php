@@ -23,13 +23,14 @@ if(isset($_POST["createUser"])) {
     if(!preg_match("/^[a-zA-Z0-9]+$/",$login)){
       echo "<script>alert('Логин может состоять только из латинских букв и цифр')</script>";
     } else {
-      if($pass != $pass_confirm){
-        echo "<script>different_passwords()</script>";
-      }else{
+      if($pass === $pass_confirm){
         $hash = password_hash($pass, PASSWORD_DEFAULT);
         my_query("INSERT INTO users VALUES('NULL', '{$hash}', '{$login}', '{$name}')", false);
+      }else{
+        echo "<script>different_passwords()</script>";
       }
     }
+    initializeUsersTable();
   }
 }
 
@@ -43,11 +44,11 @@ if(isset($_POST["editUser"])) {
     if(!preg_match("/^[a-zA-Z0-9]+$/",$login)){
       echo "<script>alert('Логин может состоять только из латинских букв и цифр')</script>";
     } else {
-      if($pass != $pass_confirm){
-        echo "<script>different_passwords();</script>";
-      }else{
+      if($pass === $pass_confirm){
         $hash = password_hash($pass, PASSWORD_DEFAULT);
-        my_query("UPDATE users SET pass_hash = '{$hash}', login='{$login}', name='{$name}' WHERE id = '$id'", false);
+        my_query("INSERT INTO users VALUES('NULL', '{$hash}', '{$login}', '{$name}')", false);
+      }else{
+        echo "<script>different_passwords()</script>";
       }
     }
     echo initializeUsersTable();

@@ -1,5 +1,27 @@
 $(document).ready(function() {
 
+  $("#addUserForm").submit(function(event) {
+    event.preventDefault();
+    $("#loading-1").css("display", "block");
+    $("#createUserBtn").val("");
+    $.post('../src/php/forms.php', {
+      createUser: true,
+      user: $('#input-1').val(),
+      login: $('#input-2').val(),
+      password: $('#input-3').val(),
+      password_confirm: $('#input-4').val()
+    }, function(data) {
+      $('#input-1').val("");
+      $('#input-2').val("");
+      $('#input-3').val("");
+      $('#input-4').val("");
+      $("#users-block").html(data);
+      $("#loading-1").css("display", "none");
+      $("#createUserBtn").val("Добавить");
+      setButtonClick();
+    });
+  });
+
   $("#delete").click(function() {
     $('.edit-delete-dropdown').fadeOut(20);
     $(".modal").fadeIn(50);
