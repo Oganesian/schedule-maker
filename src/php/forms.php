@@ -159,11 +159,12 @@ if(isset($_POST["addDriverException"])) {
 }
 
 if(isset($_POST["addPassengerException"])) {
-    if(check(1)){
-  $id_passenger = safe_query($_POST["passenger"]);
-  $date = date('Y-m-d', strtotime(safe_query($_POST["date_p"])));
-  my_query("INSERT INTO days_when_passenger_doesnt_need VALUES('{$id_passenger}', '{$date}')", false);
-}
+  if(check(1)){
+    $id_passenger = safe_query($_POST["passenger"]);
+    $date = date('Y-m-d', strtotime(safe_query($_POST["date_p"])));
+    my_query("INSERT INTO days_when_passenger_doesnt_need VALUES('{$id_passenger}', '{$date}')", false);
+    initializePassengersExceptions();
+  }
 }
 
 if(isset($_POST["updateCreateRelationForm"])){

@@ -188,7 +188,8 @@
             initializePassengersExceptionsForm();
             ?>
             <div class="submit-container">
-              <input type="submit" name="addPassengerException" class="submit" value="Добавить" />
+              <div class="ld ld-ring ld-cycle" id="loading-3" style="margin: auto; top: 33.5px; width: 2em; height: 2em"></div>
+              <input type="submit" id="addPassengerExceptionBtn" name="addPassengerException" class="submit" value="Добавить" />
             </div>
           </form>
         </div>

@@ -32,6 +32,22 @@ $(document).ready(function() {
     });
   });
 
+  $("#addPassengerExceptionForm").submit(function(event) {
+    event.preventDefault();
+    $("#loading-3").css("display", "block");
+    $("#addPassengerExceptionBtn").val("");
+    $.post('../src/php/forms.php', {
+      addPassengerException: true,
+      passenger: $('#combo-2').val(),
+      date_p: $('#input-3').val()
+    }, function(data) {
+      $("#passengers-exceptions-block").html(data);
+      $("#loading-3").css("display", "none");
+      $("#addPassengerExceptionBtn").val("Добавить");
+      setButtonClick();
+    });
+  });
+
   $("#delete-r").click(function() {
     $('.delete-r-dropdown').fadeOut(20);
     var ids = $(".delete-r-dropdown").attr("id");
