@@ -131,7 +131,7 @@
       </div>
       <div class="table-block" id="add-passengers-block">
         <div class="form-container">
-          <form action="" method="POST" enctype="multipart/form-data" name="drivers">
+          <form action="" method="POST" enctype="multipart/form-data" name="passengers" id="addPassengerForm">
             <div class="form-item">
               <input autocomplete="off" class="form-input" id="input-1" type="text" name="passenger" required>
               <label for="input-1" id="label-1">Фамилия Имя</label>
@@ -161,7 +161,8 @@
               <label for="combo-0" id="c-label-1">Необходимо мест</label>
             </div>
             <div class="submit-container">
-              <input type="submit" name="createPassenger" class="submit" value="Добавить" />
+              <div class="ld ld-ring btn-cycle ld-cycle" id="loading-1"></div>
+              <input type="submit" id="createPassengerBtn" name="createPassenger" class="submit" value="Добавить" />
             </div>
           </form>
         </div>

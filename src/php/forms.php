@@ -62,6 +62,7 @@ if(isset($_POST["createPassenger"])) {
   $email = safe_query($_POST['email']);
   $places = safe_query($_POST['places']);
   my_query("INSERT INTO passengers VALUES('NULL', '{$passenger}', '{$phone}', '{$address}', '{$email}', '{$places}')", false);
+  initializePassengersTable();
 }
 }
 

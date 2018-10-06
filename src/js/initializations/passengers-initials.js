@@ -1,5 +1,29 @@
 $(document).ready(function() {
-  
+
+  $("#addPassengerForm").submit(function(event) {
+    event.preventDefault();
+    $("#loading-1").css("display", "block");
+    $("#createPassengerBtn").val("");
+    $.post('../src/php/forms.php', {
+      createPassenger: true,
+      passenger: $('#input-1').val(),
+      address: $('#input-2').val(),
+      phone: $('#input-3').val(),
+      email: $('#input-4').val(),
+      places: $('#combo-0').val()
+    }, function(data) {
+      $('#combo-0 option').eq(0).prop('selected', true);
+      $('#input-1').val("");
+      $('#input-2').val("");
+      $('#input-3').val("");
+      $('#input-4').val("");
+      $("#passengers-block").html(data);
+      $("#loading-1").css("display", "none");
+      $("#createPassengerBtn").val("Добавить");
+      setButtonClick();
+    });
+  });
+
   $("#delete").click(function() {
     $('.edit-delete-dropdown').fadeOut(20);
     $(".modal").fadeIn(50);
