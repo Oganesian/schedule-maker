@@ -536,6 +536,14 @@ input:focus {
   color: #8A2BE2;
 }
 
+.auth {
+  margin-top: 15px;
+  width: 150px;
+  color: #1a73e8;
+  background: none;
+  font-size: 13px
+}
+
 .modal {
   background: rgba(0, 0, 0, .8);
   position: fixed;

@@ -53,6 +53,8 @@ function initializeUsersTable() {
     $echo .= "</table>";
   }
   echo $echo;
+} else {
+  echo NO_LOGIN_MSG;
 }
 }
 
@@ -304,7 +306,7 @@ function initializeScheduleForAPassenger($passenger_row, $month, $year){
         $echo .= $tr;
     }
     if($echo == $tableHeaders){
-      $echo = "<h2 class='empty-table-warning'>Нет записей</h2>";
+      $echo = "<h2 class='empty-table-warning'>Нет записей</h2></div></div>";
     } else {
       $echo .= "</table></div>
                 <div class='fixed-info'>
@@ -533,7 +535,7 @@ function myParseMonth($date){
     case "10": return "Октябрь"; break;
     case "11": return "Ноябрь"; break;
     case "12": return "Декабрь"; break;
-    default: return "";
+    default: return "Нет данных";
   }
 }
 ?>

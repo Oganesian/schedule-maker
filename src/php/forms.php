@@ -30,8 +30,8 @@ if(isset($_POST["createUser"])) {
         echo "<script>different_passwords()</script>";
       }
     }
-    initializeUsersTable();
   }
+  initializeUsersTable();
 }
 
 if(isset($_POST["editUser"])) {
@@ -46,7 +46,7 @@ if(isset($_POST["editUser"])) {
     } else {
       if($pass === $pass_confirm){
         $hash = password_hash($pass, PASSWORD_DEFAULT);
-        my_query("INSERT INTO users VALUES('NULL', '{$hash}', '{$login}', '{$name}')", false);
+        my_query("UPDATE users SET login = '{$login}', name = '{$name}', pass_hash = '{$hash}' WHERE id = '{$id}'", false);
       }else{
         echo "<script>different_passwords()</script>";
       }
@@ -86,11 +86,12 @@ if(isset($_POST["deleteDrive"])) {
 
     $result = my_query("SELECT id_passenger, passenger, address, phone FROM passengers WHERE id_passenger = '{$pass}'", true);
     $passenger_row = $result->fetch_assoc();
-    $echo = initializeScheduleForAPassenger($passenger_row);
-    $echo .= "<div class='passenger-information'>
-            <p>Адрес: {$passenger_row["address"]}</p>
-            <p>Телефон: {$passenger_row["phone"]}</p>
-          </div></div>";
+    $getDate = my_query("SELECT MAX(date) FROM fahrplan WHERE id_passenger = '{$passenger_row["id_passenger"]}'", true);
+    $date = $getDate->fetch_assoc();
+    $month = substr($date["MAX(date)"], 5, 2);
+    $month_str = myParseMonth($month);
+    $year = substr($date["MAX(date)"], 0, 4);
+    $echo = initializeScheduleForAPassenger($passenger_row, $month, $year);
     $echo .= '<script>setButtonClick()</script>';
     echo $echo;
   }
@@ -198,23 +199,21 @@ if(isset($_POST["editDriver"])) {
 
 if(isset($_POST["editSchedules"])) {
   if(check(1)) {
-
     $driver = safe_query($_POST["id_publisher"]);
     $newDriver = safe_query($_POST["id_publisher_new"]);
     $newDate = date('Y-m-d', strtotime(safe_query($_POST["date_new"])));
     $passenger = safe_query($_POST["id_passenger"]);
     $date = date('Y-m-d', strtotime(safe_query($_POST["date"])));
 
-
     my_query("UPDATE fahrplan SET id_publisher='{$newDriver}', date='{$newDate}' WHERE id_publisher='{$driver}' AND id_passenger='{$passenger}' AND date='{$date}'", false);
-
     $result = my_query("SELECT id_passenger, passenger, address, phone FROM passengers WHERE id_passenger = '{$passenger}'", true);
     $passenger_row = $result->fetch_assoc();
-    $echo = initializeScheduleForAPassenger($passenger_row);
-    $echo .= "<div class='passenger-information'>
-            <p>Адрес: {$passenger_row["address"]}</p>
-            <p>Телефон: {$passenger_row["phone"]}</p>
-          </div></div>";
+    $getDate = my_query("SELECT MAX(date) FROM fahrplan WHERE id_passenger = '{$passenger_row["id_passenger"]}'", true);
+    $date = $getDate->fetch_assoc();
+    $month = substr($date["MAX(date)"], 5, 2);
+    $month_str = myParseMonth($month);
+    $year = substr($date["MAX(date)"], 0, 4);
+    $echo = initializeScheduleForAPassenger($passenger_row, $month, $year);
     $echo .= '<script>setButtonClick();</script>';
     echo $echo;
   }

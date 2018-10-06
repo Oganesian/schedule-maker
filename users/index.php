@@ -60,8 +60,8 @@
         </div>
       </div>
       <div class="form-container" id="edit-form">
-          <form action="" method="POST" enctype="multipart/form-data" name="edit_user">
-            <input type="number" class="editUserButton" style="display: none" name="userid" />
+          <form action="" method="POST" enctype="multipart/form-data" name="edit_user" id="editUserForm">
+            <input type="number" class="editUserButton" style="display: none" id="edit-id" name="userid" />
             <div class="form-item">
               <input autocomplete="off" class="form-input" id="edit-input-1" type="text" name="user" required>
               <label for="edit-input-1" id="label-1">Фамилия Имя</label>

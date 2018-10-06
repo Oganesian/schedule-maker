@@ -1,5 +1,27 @@
 $(document).ready(function() {
 
+  $("#editUserForm").submit(function(event) {
+    event.preventDefault();
+    $.post('../src/php/forms.php', {
+      editUser: true,
+      userid: $('#edit-id').val(),
+      user: $('#edit-input-1').val(),
+      login: $('#edit-input-2').val(),
+      password: $('#edit-input-3').val(),
+      password_confirm: $('#edit-input-4').val()
+    }, function(data) {
+      $(".modal").fadeOut(50);
+      $("#editUserDialog").fadeOut(10);
+      $('#edit-id').val("");
+      $('#edit-input-1').val("");
+      $('#edit-input-2').val("");
+      $('#edit-input-3').val("");
+      $('#edit-input-4').val("");
+      $("#users-block").html(data);
+      setButtonClick();
+    });
+  });
+
   $("#addUserForm").submit(function(event) {
     event.preventDefault();
     $("#loading-1").css("display", "block");
