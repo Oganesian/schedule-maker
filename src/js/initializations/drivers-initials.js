@@ -11,9 +11,31 @@ $(document).ready(function() {
       email: $('#input-3').val(),
       places: $('#combo-0').val()
     }, function(data) {
+      $('#combo-0 option').eq(0).prop('selected', true);
+      $('#input-1').val("");
+      $('#input-2').val("");
+      $('#input-3').val("");
       $("#drivers-block").html(data);
       $("#loading-1").css("display", "none");
       $("#createDriverBtn").val("Добавить");
+      setButtonClick();
+    });
+  });
+
+  $("#createRelationForm").submit(function(event) {
+    event.preventDefault();
+    $("#loading-2").css("display", "block");
+    $("#createRelationBtn").val("");
+    $.post('../src/php/forms.php', {
+      createRelation: true,
+      driver: $('#combo-1').val(),
+      passenger: $('#combo-2').val()
+    }, function(data) {
+      $('#combo-1 option').eq(0).prop('selected', true);
+      $('#combo-2 option').eq(0).prop('selected', true);
+      $("#relations-block").html(data);
+      $("#loading-2").css("display", "none");
+      $("#createRelationBtn").val("Добавить");
       setButtonClick();
     });
   });

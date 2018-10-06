@@ -367,7 +367,8 @@ function initializeRelationsForm(){
   </div>';
   $echo .= $formItem;
   $echo .= '<div class="submit-container">
-              <input type="submit" name="createRelation" class="submit" value="Добавить" />
+              <div class="ld ld-ring btn-cycle ld-cycle" id="loading-2"></div>
+              <input type="submit" id="createRelationBtn" name="createRelation" class="submit" value="Добавить" />
             </div>';
   if($flagDrivers && $flagPassengers){
     echo $echo;

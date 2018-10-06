@@ -134,17 +134,17 @@ if(isset($_POST["deleteRelation"])) {
 
 if(isset($_POST["createRelation"])) {
   if(check(1)){
-  $id_publisher = safe_query($_POST["driver"]);
-  $id_passenger = safe_query($_POST["passenger"]);
-  $result = my_query("SELECT MIN(last_drive_date) FROM who_takes_whom WHERE id_publisher = '{$id_publisher}'", true);
-  $line = $result->fetch_assoc();
-  $min_date = $line["MIN(last_drive_date)"];
-  $date = new \DateTime($min_date);
-  $date->modify('- 2 days');
-  my_query("INSERT INTO who_takes_whom VALUES('{$id_publisher}', '{$id_passenger}', '1', '{$date->format('Y-m-d')}')", false);
-}
-
+    $id_publisher = safe_query($_POST["driver"]);
+    $id_passenger = safe_query($_POST["passenger"]);
+    $result = my_query("SELECT MIN(last_drive_date) FROM who_takes_whom WHERE id_publisher = '{$id_publisher}'", true);
+    $line = $result->fetch_assoc();
+    $min_date = $line["MIN(last_drive_date)"];
+    $date = new \DateTime($min_date);
+    $date->modify('- 2 days');
+    my_query("INSERT INTO who_takes_whom VALUES('{$id_publisher}', '{$id_passenger}', '1', '{$date->format('Y-m-d')}')", false);
+    initializeRelations();
   }
+}
 
 if(isset($_POST["addDriverException"])) {
   if(check(1)){
