@@ -1,5 +1,21 @@
 $(document).ready(function() {
 
+  $("#addNoMeetingDayForm").submit(function(event) {
+    event.preventDefault();
+    $("#loading-1").css("display", "block");
+    $("#addNoMeetingDayBtn").val("");
+    $.post('../src/php/forms.php', {
+      addNoMeetingDay: true,
+      date: $('#input-1').val()
+    }, function(data) {
+      $('#input-1').val("");
+      $("#no-meeting-days-block").html(data);
+      $("#loading-1").css("display", "none");
+      $("#addNoMeetingDayBtn").val("Добавить");
+      setButtonClick();
+    });
+  });
+
   $("#addDriverExceptionForm").submit(function(event) {
     event.preventDefault();
     $("#loading-2").css("display", "block");
@@ -10,24 +26,12 @@ $(document).ready(function() {
       date_e: $('#input-date').val(),
       type: $('#combo-type').val(),
     }, function(data) {
+      $('#combo-driver option').eq(0).prop('selected', true);
+      $('#combo-type option').eq(0).prop('selected', true);
+      $('#input-date').val("");
       $("#drivers-exceptions-block").html(data);
       $("#loading-2").css("display", "none");
       $("#addDriverExceptionBtn").val("Добавить");
-      setButtonClick();
-    });
-  });
-
-  $("#addNoMeetingDayForm").submit(function(event) {
-    event.preventDefault();
-    $("#loading-1").css("display", "block");
-    $("#addNoMeetingDayBtn").val("");
-    $.post('../src/php/forms.php', {
-      addNoMeetingDay: true,
-      date: $('#input-1').val()
-    }, function(data) {
-      $("#no-meeting-days-block").html(data);
-      $("#loading-1").css("display", "none");
-      $("#addNoMeetingDayBtn").val("Добавить");
       setButtonClick();
     });
   });
@@ -41,6 +45,8 @@ $(document).ready(function() {
       passenger: $('#combo-2').val(),
       date_p: $('#input-3').val()
     }, function(data) {
+      $('#combo-2 option').eq(0).prop('selected', true);
+      $('#input-3').val("");
       $("#passengers-exceptions-block").html(data);
       $("#loading-3").css("display", "none");
       $("#addPassengerExceptionBtn").val("Добавить");

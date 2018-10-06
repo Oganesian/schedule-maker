@@ -5,11 +5,12 @@ include_once 'auth.php';
 
 if(isset($_POST["createDriver"])) {
   if(check(1)){
-      $driver = safe_query($_POST['driver']);
-      $phone = safe_query($_POST['phone']);
-      $email = safe_query($_POST['email']);
-      $places = safe_query($_POST['places']);
-      my_query("INSERT INTO publishers VALUES('NULL', '{$driver}', '{$phone}', '{$email}', '{$places}', 'NULL')", false);
+    $driver = safe_query($_POST['driver']);
+    $phone = safe_query($_POST['phone']);
+    $email = safe_query($_POST['email']);
+    $places = safe_query($_POST['places']);
+    my_query("INSERT INTO publishers VALUES('NULL', '{$driver}', '{$phone}', '{$email}', '{$places}')", false);
+    initializeDriversTable();
   }
 }
 

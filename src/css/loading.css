@@ -1,16 +1,18 @@
+.btn-cycle {
+  margin: auto;
+  top: 33.5px;
+  width: 2em !important;
+  height: 2em !important;
+}
+
 .ld-ring {
   display: none;
   width: 1em;
   height: 1em;
   position: relative;
   color: inherit;
-/*
-  &:before
-    content: "◎"
-    display: block
-    visibility: hidden
-  */
 }
+
 .ld-ring:after {
   position: absolute;
   margin: auto;

@@ -1,5 +1,23 @@
 $(document).ready(function() {
 
+  $("#addDriverForm").submit(function(event) {
+    event.preventDefault();
+    $("#loading-1").css("display", "block");
+    $("#createDriverBtn").val("");
+    $.post('../src/php/forms.php', {
+      createDriver: true,
+      driver: $('#input-1').val(),
+      phone: $('#input-2').val(),
+      email: $('#input-3').val(),
+      places: $('#combo-0').val()
+    }, function(data) {
+      $("#drivers-block").html(data);
+      $("#loading-1").css("display", "none");
+      $("#createDriverBtn").val("Добавить");
+      setButtonClick();
+    });
+  });
+
   $("#edit-r").click(function() {
     $('.edit-delete-dropdown-r').fadeOut(20);
     var ids = $(".edit-delete-dropdown-r").attr("id");
@@ -25,7 +43,7 @@ $(document).ready(function() {
       $("#relations-block").html(data);
     });
   });
-  
+
   $("#delete").click(function() {
     $('.edit-delete-dropdown').fadeOut(20);
     $(".modal").fadeIn(50);

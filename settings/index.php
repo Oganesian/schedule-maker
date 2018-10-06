@@ -140,7 +140,7 @@
               <label for="input-1" id="label-1">Дата</label>
             </div>
             <div class="submit-container">
-              <div class="ld ld-ring ld-cycle" id="loading-1" style="margin: auto; top: 33.5px; width: 2em; height: 2em"></div>
+              <div class="ld ld-ring btn-cycle ld-cycle" id="loading-1"></div>
               <input type="submit" id="addNoMeetingDayBtn" name="addNoMeetingDay" class="submit" value="Добавить" />
             </div>
           </form>
@@ -164,7 +164,7 @@
             initializeDriversExceptionsForm();
             ?>
             <div class="submit-container">
-              <div class="ld ld-ring ld-cycle" id="loading-2" style="margin: auto; top: 33.5px; width: 2em; height: 2em"></div>
+              <div class="ld ld-ring ld-cycle btn-cycle" id="loading-2"></div>
               <input type="submit" id="addDriverExceptionBtn" name="addDriverException" class="submit" value="Добавить" />
             </div>
           </form>
@@ -188,7 +188,7 @@
             initializePassengersExceptionsForm();
             ?>
             <div class="submit-container">
-              <div class="ld ld-ring ld-cycle" id="loading-3" style="margin: auto; top: 33.5px; width: 2em; height: 2em"></div>
+              <div class="ld ld-ring ld-cycle btn-cycle" id="loading-3"></div>
               <input type="submit" id="addPassengerExceptionBtn" name="addPassengerException" class="submit" value="Добавить" />
             </div>
           </form>
