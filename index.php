@@ -116,7 +116,7 @@
               <label for="publishers-combo" id="c-label-1">Пассажир(-ы)</label>
             </div>
             <div class="submit-container">
-              <div class="ld ld-ring ld-cycle" style="left: 127px; top: 26px;"></div>
+              <div class="ld ld-ring ld-cycle" style="left: 127px; top: 29px;"></div>
               <input type="submit"  class="submit" id="createScheduleMonth" value="Создать" name="submitMonth" />
             </div>
           </form>

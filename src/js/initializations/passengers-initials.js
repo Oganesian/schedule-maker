@@ -27,7 +27,7 @@ $(document).ready(function() {
   $("#delete").click(function() {
     $('.edit-delete-dropdown').fadeOut(20);
     $(".modal").fadeIn(50);
-    $("#editPassengerDialog").fadeIn(50);
+    $("#deleteDriverDialog").fadeIn(50);
     var id = $(".edit-delete-dropdown").attr("id");
     var name = $("#" + id + "_name").html();
     myDeleteDialog(id, name);
@@ -49,7 +49,7 @@ $(document).ready(function() {
   $(".deleteDriverButton").click(function() {
     var id = this.id;
     $(".modal").fadeOut(50);
-    $("#editPassengerDialog").fadeOut(10);
+    $("#deleteDriverDialog").fadeOut(10);
     $.post('../src/php/forms.php', {
       'id': id,
       'deletePassenger': true

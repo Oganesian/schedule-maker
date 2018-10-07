@@ -34,8 +34,9 @@ echo "\n";
 function createScheduleForAMonth($meeting_days, $passengers){
   foreach($meeting_days as $meeting_day){
     foreach($passengers as $passenger){
+      $offset = 0;
       while($passenger["places_need"] > 0){
-        $drivers = my_query("SELECT id_publisher FROM who_takes_whom WHERE id_passenger = '{$passenger['id']}' AND active = '1' ORDER BY last_drive_date ASC", true);
+        $drivers = my_query("SELECT id_publisher FROM who_takes_whom WHERE id_passenger = '{$passenger['id']}' AND active = '1' ORDER BY last_drive_date ASC LIMIT {$offset}, 1", true);
         if($drivers->num_rows > 0) {
           $driver = $drivers->fetch_assoc();
           $places_in_car_sql = my_query("SELECT places_in_car FROM publishers WHERE id_publisher = '{$driver['id_publisher']}'", true);
@@ -47,18 +48,24 @@ function createScheduleForAMonth($meeting_days, $passengers){
             $type = $temp->fetch_assoc();
             $type_num = $type["type"];
           }
-          if(!$temp || !$temp->num_rows) {
-            $passenger["places_need"] -= $places_in_car_row["places_in_car"];
+          if($temp->num_rows == 0) {
+            $meeting_day_str = $meeting_day->format('Y-m-d');
             $id_publisher = $driver["id_publisher"];
             $id_passenger = $passenger["id"];
-            $meeting_day_str = $meeting_day->format('Y-m-d');
-            my_query("UPDATE who_takes_whom SET last_drive_date = '{$meeting_day_str}' WHERE id_publisher = '{$id_publisher}' AND id_passenger = '{$id_passenger}'", false);
-            my_query("INSERT INTO fahrplan VALUES('$id_publisher', '$id_passenger', '$meeting_day_str', '$type_num')", false);
+            $is_driver_free_res = my_query("SELECT id_publisher FROM fahrplan WHERE id_publisher = '{$id_publisher}' AND `date` = '{$meeting_day_str}'", true);
+            if($is_driver_free_res->num_rows == 0) {
+              $passenger["places_need"] -= $places_in_car_row["places_in_car"];
+              my_query("UPDATE who_takes_whom SET last_drive_date = '{$meeting_day_str}' WHERE id_publisher = '{$id_publisher}' AND id_passenger = '{$id_passenger}'", false);
+              my_query("INSERT INTO fahrplan VALUES('$id_publisher', '$id_passenger', '$meeting_day_str', '$type_num')", false);
+            } else {
+              $offset++;
+            }
           } else {
             break 1;
           }
         }
       }
+      $offset = 0;
     }
   }
 }
