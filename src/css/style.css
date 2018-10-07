@@ -524,6 +524,10 @@ input:focus {
   margin-right: 20px;
 }
 
+.cancel:hover, .auth:hover {
+  background-color: #f6f8fa;
+}
+
 .main-row table th {
   font-size: 18px;
 }
