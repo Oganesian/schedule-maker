@@ -1,7 +1,5 @@
 # schedule-maker
 
-## Soon here will be a good README.md
-
 ## Screenshots
 
-## Database
+![Screenshot 1](/project_screens/1.png?raw=true)
